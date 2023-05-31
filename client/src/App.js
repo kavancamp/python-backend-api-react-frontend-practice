@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function App() {
+export default function App() {
   const [data, setData] = useState([{}]);
   useEffect(() => {
     fetch("/members")
@@ -10,7 +10,14 @@ function App() {
         console.log(data);
       });
   }, []);
-  return <div>App</div>;
+  return (
+    //If data fetched display members
+    <div>
+      {typeof data.members === "undefind" ? (
+        <p>Loading....</p>
+      ) : (
+        data.members.map((member, i) => <p key={i}>{member}</p>)
+      )}
+    </div>
+  );
 }
-
-export default App;
